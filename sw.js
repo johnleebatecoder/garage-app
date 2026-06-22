@@ -1,6 +1,6 @@
 /* 掌上车库 — service worker（离线缓存）
    依赖已全部内联进 index.html，这里只缓存本地资源，不再依赖任何外部 CDN。 */
-const CACHE = "garage-v7";
+const CACHE = "garage-v8";
 const ASSETS = [
   "./",
   "./index.html",

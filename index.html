@@ -11,7 +11,6 @@
 <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
 <link rel="manifest" href="./manifest.json" />
 <style>
-/* 首页用 Fraunces 衬线(Claude 暖壳);Porsche 模块用官方 Porsche Next。全本地、可离线 */
 @font-face{font-family:'Fraunces';src:url('./fonts/fraunces-400.woff2') format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:'Fraunces';src:url('./fonts/fraunces-500.woff2') format('woff2');font-weight:500;font-display:swap}
 @font-face{font-family:'Fraunces';src:url('./fonts/fraunces-600.woff2') format('woff2');font-weight:600;font-display:swap}
@@ -22,31 +21,28 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body,#root{height:100%}
 :root{
-  --paper:#f5f4ed; --ivory:#faf9f5; --sand:#e8e6dc; --ink:#141413; --olive:#5e5d59; --stone:#87867f;
-  --line-soft:#f0eee6; --line:#e8e6dc; --clay:#c96442; --coral:#d97757;
-  /* Porsche */
+  --paper:#f5f4ed;--ivory:#faf9f5;--sand:#e8e6dc;--ink:#141413;--olive:#5e5d59;--stone:#87867f;
+  --line-soft:#f0eee6;--line:#e8e6dc;--clay:#c96442;--coral:#d97757;
   --pn:'Porsche Next',-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB',system-ui,sans-serif;
   --serif:'Fraunces','Songti SC','Noto Serif SC',Georgia,serif;
   --sans:-apple-system,BlinkMacSystemFont,'PingFang SC',system-ui,sans-serif;
-  --pl-bg:#ffffff; --pl-bg2:#f2f2f2; --pl-ink:#0e0e12; --pl-mut:#6b6d70; --pl-line:#e3e3e3;
-  --pd-bg:#0e0e12; --pd-surf:#16161a; --pd-ink:#ffffff; --pd-mut:#9b9da1; --pd-line:rgba(255,255,255,.14);
-  --pr:#d5001c;
-  --safe-t:env(safe-area-inset-top); --safe-b:env(safe-area-inset-bottom);
+  --gray:#f5f5f7;--ink2:#1d1d1f;--mut:#86868b;--pr:#d5001c;
+  --safe-t:env(safe-area-inset-top);--safe-b:env(safe-area-inset-bottom);
 }
-body{font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;background:#0e0e12;color:var(--ink)}
+body{font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;background:#000;color:var(--ink)}
 .frame{max-width:430px;margin:0 auto;min-height:100vh;min-height:100dvh;position:relative;overflow-x:hidden}
-.enter{animation:enter .45s cubic-bezier(.16,1,.3,1) both}
+.enter{animation:enter .5s cubic-bezier(.16,1,.3,1) both}
 @keyframes enter{from{opacity:0}to{opacity:1}}
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
 .reveal.in{opacity:1;transform:none}
 
-/* ===== 首页 · Claude 暖壳(展馆大堂) ===== */
+/* ===== 首页 · Claude 暖壳 ===== */
 .shell{background:var(--paper);min-height:100vh;min-height:100dvh;color:var(--ink);padding-bottom:calc(var(--safe-b) + 28px)}
 .sh-top{display:flex;align-items:center;justify-content:space-between;padding:calc(var(--safe-t) + 12px) 20px 10px;position:sticky;top:0;z-index:20;background:linear-gradient(var(--paper) 72%,rgba(245,244,237,0))}
 .sh-ic{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--olive);background:transparent;border:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .18s}
 .sh-ic:active{background:var(--sand);transform:scale(.94)}
 .sh-word{font-family:var(--serif);font-weight:500;font-size:20px;letter-spacing:.2px}
-.sh-hello{padding:34px 24px 6px}
+.sh-hello{padding:32px 24px 6px}
 .sh-eye{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--stone);font-weight:600;margin-bottom:16px}
 .sh-hello h1{font-family:var(--serif);font-weight:500;font-size:46px;line-height:1.08;letter-spacing:-.4px}
 .sh-hello h1 em{font-style:normal;color:var(--clay)}
@@ -67,167 +63,106 @@ body{font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:o
 .sh-tag{font-size:10px;font-weight:600;color:var(--clay);background:rgba(201,100,66,.1);border-radius:20px;padding:3px 8px;flex:0 0 auto}
 .sh-foot{font-size:11.5px;color:var(--stone);text-align:center;padding:34px 30px 0;line-height:1.8}
 
-/* ===== Porsche 模块 · 官方设计语言 ===== */
-.px{font-family:var(--pn);min-height:100vh;min-height:100dvh;background:var(--pl-bg);color:var(--pl-ink)}
-.pbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:calc(var(--safe-t) + 11px) 16px 11px;transition:background .3s,color .3s}
-.pbar.onlight{background:rgba(255,255,255,.9);-webkit-backdrop-filter:saturate(140%) blur(12px);backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid var(--pl-line);color:var(--pl-ink)}
-.pbar.ondark{color:#fff}
-.pbar-btn{width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:inherit;-webkit-tap-highlight-color:transparent}
-.pbar-btn:active{opacity:.5}
-.pbar-word{font-weight:700;font-size:15px;letter-spacing:4px}
-.pbar-r{display:flex;gap:16px}
+/* ===== Porsche · Apple 设计语言 ===== */
+.ap{font-family:var(--pn);background:#000;color:#fff;min-height:100vh;min-height:100dvh}
+.anav{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:60;display:flex;align-items:center;justify-content:space-between;height:calc(var(--safe-t) + 48px);padding:var(--safe-t) 16px 0;background:rgba(0,0,0,.72);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(255,255,255,.1)}
+.anav-btn{width:30px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:none;color:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.anav-btn:active{opacity:.5}
+.anav-logo{font-weight:700;font-size:14px;letter-spacing:4px;color:#fff}
 
-/* 车系总览(Lineup) */
-.pl-hero{position:relative;height:min(64vh,480px);overflow:hidden;background:#000}
-.pl-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 56%}
-.pl-hero-g{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,18,.5),rgba(14,14,18,0) 38%,rgba(14,14,18,.2) 64%,rgba(14,14,18,.95) 100%)}
-.pl-hero-c{position:absolute;left:20px;right:20px;bottom:30px;color:#fff;z-index:2}
-.pl-eye{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.75)}
-.pl-word{font-weight:700;font-size:40px;letter-spacing:7px;margin:8px 0 2px}
-.pl-claim{font-size:14px;font-weight:400;color:rgba(255,255,255,.86);letter-spacing:.3px}
-.pl-rule{width:34px;height:3px;background:var(--pr);margin-top:16px}
-.pl-body{padding:34px 16px calc(var(--safe-b) + 40px)}
-.pl-h{font-weight:700;font-size:24px;letter-spacing:.2px}
-.pl-h span{color:var(--pl-mut);font-weight:400;font-size:14px;letter-spacing:2px;margin-left:8px}
-.pl-sub{font-size:13px;color:var(--pl-mut);margin-top:8px;line-height:1.6}
-.feat{margin-top:22px;border:1px solid var(--pl-line);border-radius:3px;overflow:hidden;cursor:pointer;background:#fff;transition:box-shadow .2s,transform .12s;-webkit-tap-highlight-color:transparent}
-.feat:active{transform:scale(.99);box-shadow:0 8px 30px rgba(0,0,0,.1)}
-.feat-img{position:relative;height:188px;overflow:hidden;background:var(--pl-bg2)}
-.feat-img img{width:100%;height:100%;object-fit:cover}
-.feat-badge{position:absolute;top:12px;left:12px;font-size:10px;font-weight:700;letter-spacing:1px;color:#fff;background:var(--pr);padding:4px 8px;border-radius:2px}
-.feat-c{padding:16px 16px 18px;display:flex;align-items:center;justify-content:space-between}
-.feat-t{font-weight:700;font-size:26px;letter-spacing:.5px}
-.feat-s{font-size:12.5px;color:var(--pl-mut);margin-top:4px}
-.feat-go{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--pr);letter-spacing:.5px}
-.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-.mcard{border:1px solid var(--pl-line);border-radius:3px;overflow:hidden;background:#fff;position:relative}
-.mcard-img{height:96px;overflow:hidden;background:var(--pl-bg2)}
-.mcard-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(.1)}
-.mcard-c{padding:11px 12px 13px}
-.mcard-t{font-weight:700;font-size:16px;display:flex;align-items:center;gap:5px}
-.mcard-s{font-size:11px;color:var(--pl-mut);margin-top:3px}
-.mcard-lock{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.9);border-radius:2px;padding:3px 6px;font-size:9px;font-weight:600;color:var(--pl-mut);letter-spacing:.5px}
-.pxd{background:#0e0e12;color:#fff}
-.pl-intro{padding:30px 18px 6px}
-.pl-intro .pl-h{font-weight:700;font-size:23px}
-.pl-intro .pl-h span{color:var(--pd-mut)}
-.pl-intro .pl-sub{color:var(--pd-mut)}
-.bands{margin-top:18px}
-.band{position:relative;height:240px;overflow:hidden;cursor:pointer;background:#000;border-top:1px solid rgba(255,255,255,.08);-webkit-tap-highlight-color:transparent}
-.band img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1)}
-.band.live:active img{transform:scale(1.04)}
-.band.locked img{filter:grayscale(.45) brightness(.62)}
-.band-g{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 38%,rgba(0,0,0,.9))}
-.band-badge{position:absolute;top:14px;left:18px;z-index:2;font-size:10px;font-weight:700;letter-spacing:.5px;color:#fff;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.28);padding:4px 9px;border-radius:2px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-.band-badge.red{background:var(--pr);border-color:var(--pr)}
-.band-c{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;color:#fff;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
-.band-name{font-weight:700;font-size:36px;letter-spacing:1px;line-height:.95}
-.band-body{font-size:12px;color:rgba(255,255,255,.82);margin-top:7px}
-.band-go{font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:4px;white-space:nowrap}
-.pl-note{font-size:11px;color:var(--pd-mut);text-align:center;padding:26px 24px 0;line-height:1.7}
+.scene{position:relative;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;min-height:68vh;overflow:hidden;text-align:center;padding:0 22px 42px;-webkit-tap-highlight-color:transparent}
+.scene-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.scene-g{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.45),transparent 28%,transparent 52%,rgba(0,0,0,.88))}
+.scene-c{position:relative;z-index:2;max-width:360px}
+.scene-eye{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#fff;opacity:.75;margin-bottom:8px}
+.scene-h{font-weight:700;font-size:52px;letter-spacing:-1px;line-height:1.02;color:#fff}
+.scene-sub{font-size:15.5px;font-weight:400;color:#fff;opacity:.92;margin-top:12px;line-height:1.4}
+.scene-cta{display:flex;gap:12px;justify-content:center;margin-top:22px}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:980px;padding:10px 20px;font-size:13.5px;font-weight:600;cursor:pointer;border:1px solid transparent;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.pill.red{background:var(--pr);color:#fff}
+.pill.ghost{background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.4);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pill:active{transform:scale(.96)}
+.ap-foot{background:#000;color:#6e6e73;font-size:11px;text-align:center;line-height:1.85;padding:40px 24px calc(var(--safe-b) + 44px)}
 
-/* 911 详情 */
-.pd{font-family:var(--pn);background:var(--pd-bg);color:var(--pd-ink);min-height:100vh;min-height:100dvh}
-.pd-hero{position:relative;height:min(82vh,600px);overflow:hidden;background:#000}
-.pd-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:64% 50%;animation:kb 18s ease-out both}
-@keyframes kb{from{transform:scale(1.06)}to{transform:scale(1)}}
-.pd-hero-g{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,18,.45),rgba(14,14,18,0) 26%,rgba(14,14,18,.1) 54%,rgba(14,14,18,.9) 88%,var(--pd-bg))}
-.pd-hero-c{position:absolute;left:18px;right:18px;bottom:26px;z-index:2}
-.pd-eye{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--pd-mut)}
-.pd-911{font-weight:700;font-size:96px;line-height:.86;letter-spacing:1px;color:#fff;margin:6px 0 4px}
-.pd-claim{font-size:16px;font-weight:400;color:#fff;letter-spacing:.3px}
-.pd-cap{font-size:11px;color:var(--pd-mut);margin-top:12px}
+/* 变体 */
+.vrow{padding:54px 16px;background:#000;text-align:center}
+.vrow-h{font-weight:700;font-size:30px;letter-spacing:-.5px}
+.vrow-sub{font-size:13px;color:var(--mut);margin-top:6px;margin-bottom:24px}
+.vlist{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px;text-align:left}
+.vlist::-webkit-scrollbar{display:none}
+.vlist::after{content:"";flex:0 0 4px}
+.vc{flex:0 0 208px;background:#1c1c1e;border-radius:16px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:border-color .2s}
+.vc.on{border-color:var(--pr)}
+.vc-img{height:122px;background:#000}.vc-img img{width:100%;height:100%;object-fit:cover}
+.vc-c{padding:14px 15px 16px}
+.vc-t{font-weight:700;font-size:16px}.vc-b{font-size:10.5px;color:var(--mut);margin-top:3px}
+.vc-row{display:flex;gap:14px;margin-top:12px}
+.vc-row .v{font-weight:700;font-size:15px}.vc-row .v small{font-size:9px;color:var(--mut);font-weight:400}
+.vc-row .l{font-size:8.5px;color:var(--mut);text-transform:uppercase;margin-top:2px}
 
-.pnav{position:sticky;top:calc(var(--safe-t) + 46px);z-index:50;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;background:rgba(14,14,18,.9);-webkit-backdrop-filter:saturate(150%) blur(14px);backdrop-filter:saturate(150%) blur(14px);border-bottom:1px solid var(--pd-line)}
-.pnav::-webkit-scrollbar{display:none}
-.pnav button{flex:0 0 auto;font-family:var(--pn);font-size:12.5px;font-weight:600;letter-spacing:.5px;padding:13px 15px;color:var(--pd-mut);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.pnav button.on{color:#fff;border-bottom-color:var(--pr)}
-
-.psec{padding:42px 16px 12px;scroll-margin-top:92px}
-.psec.light{background:var(--pl-bg);color:var(--pl-ink)}
-.psec.dark{background:var(--pd-bg);color:var(--pd-ink)}
-.pk{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--pr);font-weight:700}
-.ph2{font-weight:700;font-size:27px;letter-spacing:.2px;margin-top:10px;line-height:1.1}
-.ph2 span{display:block;font-size:13px;font-weight:400;color:var(--pd-mut);margin-top:7px;letter-spacing:1px}
-.psec.light .ph2 span{color:var(--pl-mut)}
-.plead{font-size:13.5px;color:var(--pd-mut);line-height:1.7;margin-top:14px;max-width:340px}
-.psec.light .plead{color:var(--pl-mut)}
-
-/* 变体网格(porsche.com 招牌) */
-.vgrid{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding:20px 16px 6px;margin:0 -16px}
-.vgrid::-webkit-scrollbar{display:none}
-.vgrid::after{content:"";flex:0 0 4px}
-.vcard{flex:0 0 200px;border:1px solid var(--pd-line);border-radius:3px;overflow:hidden;background:var(--pd-surf);cursor:pointer;transition:border-color .2s;-webkit-tap-highlight-color:transparent}
-.vcard.on{border-color:var(--pr);box-shadow:inset 0 0 0 1px var(--pr)}
-.vcard-img{height:118px;overflow:hidden;background:#000}
-.vcard-img img{width:100%;height:100%;object-fit:cover}
-.vcard-c{padding:12px 13px 14px}
-.vcard-t{font-weight:700;font-size:16px}
-.vcard-b{font-size:10.5px;color:var(--pd-mut);margin-top:3px;letter-spacing:.3px}
-.vcard-row{display:flex;gap:12px;margin-top:11px}
-.vcard-row .v{font-weight:700;font-size:15px}
-.vcard-row .v small{font-size:9px;color:var(--pd-mut);font-weight:400}
-.vcard-row .l{font-size:8.5px;color:var(--pd-mut);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
-
-/* 参数展板(白) */
-.sheet{margin-top:6px;border:1px solid var(--pl-line);border-radius:3px;background:#fff}
-.sheet-h{display:flex;align-items:center;justify-content:space-between;padding:14px 15px;border-bottom:1px solid var(--pl-line)}
-.sheet-h .t{font-weight:700;font-size:17px}
-.sheet-h .b{font-size:11px;color:var(--pl-mut)}
-.sheet-r{display:flex;justify-content:space-between;align-items:center;padding:13px 15px;border-bottom:1px solid #eee}
+/* 参数(浅灰) */
+.sheet{background:var(--gray);color:var(--ink2);padding:56px 22px}
+.sheet-h{text-align:center;font-weight:700;font-size:26px;letter-spacing:-.4px}
+.sheet-sub{text-align:center;font-size:12.5px;color:var(--mut);margin-top:6px;margin-bottom:24px}
+.sheet-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:rgba(0,0,0,.07) 0 4px 26px}
+.sheet-r{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid #ededed}
 .sheet-r:last-child{border-bottom:none}
-.sheet-r .k{font-size:12.5px;color:var(--pl-mut)}
-.sheet-r .vv{font-weight:700;font-size:14px;color:var(--pl-ink)}
-
-/* 传承台账 */
-.tl{margin-top:22px;border-top:1px solid var(--pd-line)}
-.tl-i{display:grid;grid-template-columns:60px 1fr;gap:14px;padding:15px 0;border-bottom:1px solid var(--pd-line)}
-.tl-i.key{box-shadow:inset 3px 0 0 var(--pr);padding-left:12px;margin-left:-12px}
-.tl-y{font-weight:700;font-size:15px}
-.tl-i.key .tl-y{color:var(--pr)}
-.tl-n{font-weight:600;font-size:14.5px}
-.tl-t{font-size:12px;color:var(--pd-mut);margin-top:5px;line-height:1.55}
-
-/* 赛道画廊 */
-.gal{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding:20px 16px 6px;margin:0 -16px}
-.gal::-webkit-scrollbar{display:none}
-.gcard{flex:0 0 250px;height:320px;border-radius:3px;overflow:hidden;position:relative;background:#000}
-.gcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.gcard-g{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,transparent 32%,rgba(0,0,0,.88) 100%)}
-.gcard-no{position:absolute;top:12px;left:13px;z-index:2;font-weight:700;font-size:34px;color:#fff;line-height:1}
-.gcard-no:before{content:"#";font-size:16px;color:var(--pr);vertical-align:top}
-.gcard-cls{position:absolute;top:14px;right:13px;z-index:2;font-size:9px;font-weight:600;letter-spacing:.5px;color:#fff;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.2);padding:4px 7px;border-radius:2px}
-.gcard-c{position:absolute;left:14px;right:14px;bottom:14px;z-index:2}
-.gcard-t{font-weight:700;font-size:22px;color:#fff}
-.gcard-s{font-size:11px;color:rgba(255,255,255,.8);margin-top:6px;line-height:1.4}
+.sheet-r .k{font-size:13px;color:#6e6e73}.sheet-r .vv{font-weight:700;font-size:14px;color:var(--ink2)}
 
 /* 纽北 */
-.nb{margin-top:22px;display:flex;gap:18px;align-items:flex-start;border:1px solid var(--pd-line);border-radius:3px;padding:18px}
-.nb-map{flex:0 0 88px}
-.nb-r{flex:1}
-.nb-lap{font-weight:700;font-size:40px;letter-spacing:-1px;line-height:1}
-.nb-lap .ms{color:var(--pr)}
-.nb-ln{font-size:11px;color:var(--pd-mut);margin-top:9px;line-height:1.5}
-.nb-grid{display:flex;gap:16px;margin-top:16px;flex-wrap:wrap}
-.nb-c .v{font-weight:700;font-size:16px}
-.nb-c .l{font-size:9px;color:var(--pd-mut);text-transform:uppercase;letter-spacing:.5px;margin-top:3px}
+.ring{background:#000;color:#fff;padding:64px 22px;text-align:center}
+.ring-eye{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--pr);font-weight:600}
+.ring-lap{font-weight:700;font-size:64px;letter-spacing:-2px;margin:14px 0 4px;line-height:1}
+.ring-lap .ms{color:var(--pr)}
+.ring-sub{font-size:13.5px;color:var(--mut);line-height:1.5}
+.ring-map{width:80px;margin:22px auto 0}
+.ring-grid{display:flex;justify-content:center;gap:34px;margin-top:26px}
+.ring-c .v{font-weight:700;font-size:20px}.ring-c .l{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
 
-/* 动力 */
-.eng-stage{margin:22px 0 6px;display:flex;justify-content:center}
+/* 动力(压轴) */
+.tech{background:radial-gradient(120% 80% at 50% 0%,#161616,#000 60%);color:#fff;padding:70px 22px 76px;text-align:center}
+.tech-eye{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--pr);font-weight:600}
+.tech-h{font-weight:700;font-size:46px;letter-spacing:-1px;margin-top:10px;line-height:1}
+.tech-sub{font-size:15px;color:#aeaeb2;margin-top:14px;max-width:320px;margin-left:auto;margin-right:auto;line-height:1.5}
+.tech-stage{margin:36px 0 12px;display:flex;justify-content:center}
 .calls{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
-.call{font-size:10.5px;letter-spacing:.3px;border:1px solid var(--pd-line);padding:6px 11px;border-radius:2px}
+.call{font-size:10.5px;letter-spacing:.4px;border:1px solid rgba(255,255,255,.2);padding:6px 11px;border-radius:980px}
 .call b{color:var(--pr);font-weight:700}
-.eng-x{font-size:13px;color:#c8cace;line-height:1.85;margin-top:22px}
-.eng-stats{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--pd-line);border-left:1px solid var(--pd-line);margin-top:22px}
-.eng-s{padding:14px;border-right:1px solid var(--pd-line);border-bottom:1px solid var(--pd-line)}
-.eng-s .v{font-weight:700;font-size:19px}
-.eng-s .v small{font-size:11px;color:var(--pd-mut);font-weight:400}
-.eng-s .l{font-size:9px;color:var(--pd-mut);text-transform:uppercase;letter-spacing:.5px;margin-top:6px}
+.tech-x{font-size:13.5px;color:#aeaeb2;line-height:1.9;margin-top:24px;text-align:left;max-width:360px;margin-left:auto;margin-right:auto}
+.tech-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.12);margin-top:30px;border-radius:18px;overflow:hidden}
+.tech-s{background:#000;padding:20px}
+.tech-s .v{font-weight:700;font-size:22px}.tech-s .v small{font-size:11px;color:var(--mut);font-weight:400}
+.tech-s .l{font-size:9.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;margin-top:7px}
 
-.pfoot{font-size:10.5px;color:var(--pd-mut);text-align:center;line-height:1.85;padding:34px 22px calc(var(--safe-b) + 42px);border-top:1px solid var(--pd-line)}
+/* GT3 列表 */
+.gitem{position:relative;height:64vh;max-height:480px;overflow:hidden;cursor:pointer;border-top:1px solid rgba(255,255,255,.08);-webkit-tap-highlight-color:transparent}
+.gitem img{width:100%;height:100%;object-fit:cover}
+.gitem-g{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.4),transparent 32%,rgba(0,0,0,.9))}
+.gitem-no{position:absolute;top:16px;left:18px;z-index:2;font-weight:700;font-size:46px;color:#fff;line-height:1}
+.gitem-no:before{content:"#";font-size:20px;color:var(--pr);vertical-align:top}
+.gitem-cls{position:absolute;top:22px;right:18px;z-index:2;font-size:10px;font-weight:600;letter-spacing:.5px;color:#fff;border:1px solid rgba(255,255,255,.3);padding:4px 9px;border-radius:980px}
+.gitem-c{position:absolute;left:18px;right:18px;bottom:20px;z-index:2}
+.gitem-name{font-weight:700;font-size:36px;letter-spacing:-.5px;color:#fff}
+.gitem-team{font-size:12px;color:rgba(255,255,255,.8);margin-top:5px}
+
+/* GT3 单车海报 + 故事 */
+.poster{position:relative;height:72vh;max-height:560px;overflow:hidden;background:#000}
+.poster img{width:100%;height:100%;object-fit:cover}
+.poster-g{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 30%,rgba(0,0,0,.9))}
+.poster-c{position:absolute;left:20px;right:20px;bottom:26px;z-index:2}
+.poster-no{font-weight:700;font-size:84px;color:#fff;line-height:.84;letter-spacing:-2px}
+.poster-no:before{content:"#";font-size:34px;color:var(--pr);vertical-align:top}
+.poster-name{font-weight:700;font-size:40px;letter-spacing:-.5px;color:#fff;margin-top:6px}
+.poster-team{font-size:13px;color:rgba(255,255,255,.82);margin-top:8px}
+.pstory{background:var(--gray);color:var(--ink2);padding:54px 22px}
+.pstory-eye{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--pr);font-weight:600}
+.pstory-h{font-weight:700;font-size:34px;letter-spacing:-.5px;margin-top:10px}
+.pstory-x{font-size:15.5px;line-height:1.75;color:var(--ink2);margin-top:18px}
+.pstory-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.ptag{font-size:11px;font-weight:600;color:#6e6e73;background:#fff;border:1px solid #e0e0e0;border-radius:980px;padding:7px 14px}
 
 @keyframes fire{0%,100%{opacity:0}45%{opacity:.9}55%{opacity:.5}}
-@media (prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}.enter{animation:none}.pd-hero img{animation:none}}
+@media (prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}.enter{animation:none}}
 </style>
 </head>
 <body>
@@ -596,7 +531,7 @@ const IChev = ({
   viewBox: "0 0 24 24",
   fill: "none",
   stroke: "currentColor",
-  strokeWidth: "2",
+  strokeWidth: "2.4",
   strokeLinecap: "round",
   strokeLinejoin: "round"
 }, /*#__PURE__*/React.createElement("path", {
@@ -622,7 +557,7 @@ const ILock = ({
   d: "M8 11V8a4 4 0 0 1 8 0v3"
 }));
 const IBack = ({
-  s = 20
+  s = 21
 }) => /*#__PURE__*/React.createElement("svg", {
   width: s,
   height: s,
@@ -633,7 +568,7 @@ const IBack = ({
   strokeLinecap: "round",
   strokeLinejoin: "round"
 }, /*#__PURE__*/React.createElement("path", {
-  d: "M19 12H5M11 6l-6 6 6 6"
+  d: "M15 18l-6-6 6-6"
 }));
 const IShare = ({
   s = 18
@@ -651,29 +586,19 @@ const IShare = ({
 }), /*#__PURE__*/React.createElement("path", {
   d: "M12 16V3M8 7l4-4 4 4"
 }));
-const IPlay = ({
-  s = 18
-}) => /*#__PURE__*/React.createElement("svg", {
-  width: s,
-  height: s,
-  viewBox: "0 0 24 24",
-  fill: "#fff"
-}, /*#__PURE__*/React.createElement("path", {
-  d: "M8 5v14l11-7z"
-}));
 const BRANDS = [{
   id: "porsche",
   name: "Porsche",
   mono: "P",
   color: "#c96442",
-  sub: "911 / Taycan / Cayenne · 官方观感复刻",
+  sub: "911 / GT3 赛事 / Taycan · Apple 风格复刻",
   live: true
 }, {
   id: "bmw",
   name: "BMW M",
   mono: "M",
   color: "#2e5a8f",
-  sub: "M4 / M5 · 蓝紫红三色的暴力美学",
+  sub: "M3 / M4 / 勒芒 · 蓝紫红三色暴力美学",
   live: false
 }, {
   id: "amg",
@@ -762,59 +687,42 @@ const V911 = [{
   top: "330 km/h",
   nb: "7:03.9"
 }];
-const HISTORY = [{
-  y: "1963",
-  n: "901 首发",
-  t: "法兰克福车展登场,圆灯轮廓就此定型。",
-  key: true
-}, {
-  y: "1973",
-  n: "Carrera RS 2.7",
-  t: "鸭尾、轻量化、赛道基因,最具收藏价值的早期 911。"
-}, {
-  y: "1994",
-  n: "993",
-  t: "末代风冷,多连杆后悬,被很多人视为最美一代。",
-  key: true
-}, {
-  y: "1998",
-  n: "996",
-  t: "首次水冷,争议煎蛋灯,却让 911 活进现代。",
-  key: true
-}, {
-  y: "2019",
-  n: "992",
-  t: "第八代。全铝车身、数字座舱、八速 PDK。"
-}, {
-  y: "2024",
-  n: "992.2 T-Hybrid",
-  t: "GTS 用上 T-Hybrid,史上第一台混动量产 911。",
-  key: true
-}];
-const RACE = [{
+const GT3 = [{
+  id: "rexy",
   img: "./img/p4.jpg",
   no: "80",
   name: "Rexy",
-  s: "AO Racing 911 GT3 R · IMSA 夜战 ·「小恐龙」",
-  cls: "IMSA GTD"
+  team: "AO Racing · 911 GT3 R",
+  cls: "IMSA GTD",
+  story: "AO Racing 把一只咧嘴暴龙画上 911 GT3 R——大灯是眼睛,前唇是利齿。它不是厂队,却成了 IMSA 最受欢迎的赛车,粉丝挤满每一站围栏。代托纳、塞布林、勒芒,绿色暴龙一路咆哮(Rawr)。这是你点名的「小恐龙」。",
+  tags: ["IMSA · GTD", "代托纳 24h", "「小恐龙」Rawr"]
 }, {
+  id: "cola",
   img: "./img/p1.jpg",
   no: "912",
   name: "Coca-Cola",
-  s: "911 RSR · 2019 Petit Le Mans 特别涂装",
-  cls: "IMSA GTLM"
+  team: "Porsche GT Team · 911 RSR",
+  cls: "IMSA GTLM",
+  story: "2019 IMSA 收官战 Petit Le Mans,保时捷厂队给两台 911 RSR 披上经典可乐红。这是 991 代 RSR 在北美 GTLM 的告别演出之一,红白配色就此成为一代影像经典。",
+  tags: ["IMSA · GTLM", "Petit Le Mans", "特别涂装"]
 }, {
+  id: "werks",
   img: "./img/p2.jpg",
   no: "92",
   name: "Werks",
-  s: "911 RSR · 勒芒 24 小时厂队金白",
-  cls: "WEC GTE"
+  team: "Porsche GT Team · 911 RSR",
+  cls: "WEC GTE-Pro",
+  story: "勒芒 24 小时,#92 911 RSR 以金白厂队涂装出战 GTE-Pro。中置化布局、自吸水平六缸的嘶吼,在 La Sarthe 的夜里划过一道金线。",
+  tags: ["WEC · GTE", "勒芒 24h", "厂队金白"]
 }, {
+  id: "green",
   img: "./img/p3.jpg",
   no: "8",
   name: "Green Hell",
-  s: "911 GT3 R · 纽北北环迷彩",
-  cls: "NLS"
+  team: "IronForce · 911 GT3 R",
+  cls: "NLS 纽北",
+  story: "纽北北环,IronForce 的 911 GT3 R 披迷彩、配紫色锻轮,在 24 小时耐力赛里与 Eifel 山区的浓雾暴雨缠斗。这里是所有 911 的精神原乡——「绿色地狱」。",
+  tags: ["NLS · 纽北", "24h 耐力", "迷彩涂装"]
 }];
 function FlatSix({
   reduced
@@ -824,7 +732,7 @@ function FlatSix({
     rows = [44, 80, 116];
   return /*#__PURE__*/React.createElement("svg", {
     viewBox: "0 0 320 170",
-    width: "270",
+    width: "268",
     "aria-label": "水平对置六缸示意图"
   }, /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("radialGradient", {
     id: "spark",
@@ -848,7 +756,7 @@ function FlatSix({
     cx: "160",
     cy: "85",
     r: "13",
-    fill: "#0e0e12",
+    fill: "#000",
     stroke: "#55585f",
     strokeWidth: "2"
   }), /*#__PURE__*/React.createElement("circle", {
@@ -918,7 +826,7 @@ function Nord({
   }, /*#__PURE__*/React.createElement("path", {
     d: d,
     fill: "none",
-    stroke: "rgba(255,255,255,.16)",
+    stroke: "rgba(255,255,255,.18)",
     strokeWidth: "5"
   }), /*#__PURE__*/React.createElement("path", {
     id: "trk",
@@ -938,31 +846,6 @@ function Nord({
     xlinkHref: "#trk",
     href: "#trk"
   }))));
-}
-function Reveal({
-  children,
-  className = ""
-}) {
-  const ref = useRef(null);
-  const [shown, setShown] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) {
-        setShown(true);
-        io.disconnect();
-      }
-    }, {
-      threshold: 0.1
-    });
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-  return /*#__PURE__*/React.createElement("div", {
-    ref: ref,
-    className: `reveal ${shown ? "in" : ""} ${className}`
-  }, children);
 }
 function Shell({
   onOpen
@@ -1026,221 +909,202 @@ function Shell({
   }, "个人鉴赏 demo · 外壳沿用 Claude 移动端语言", /*#__PURE__*/React.createElement("br", null), "每个品牌按其官方设计语言独立复刻"));
 }
 function Lineup({
-  onOpen,
-  setDark
+  onOpen
 }) {
   useEffect(() => {
-    setDark(true);
     window.scrollTo(0, 0);
   }, []);
   return /*#__PURE__*/React.createElement("div", {
-    className: "px pxd enter"
+    className: "ap enter"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "pl-hero"
+    className: "scene",
+    style: {
+      minHeight: "92vh"
+    }
   }, /*#__PURE__*/React.createElement("img", {
+    className: "scene-img",
     src: "./img/road.jpg",
-    alt: "Porsche 911"
+    alt: "Porsche"
   }), /*#__PURE__*/React.createElement("div", {
-    className: "pl-hero-g"
+    className: "scene-g"
   }), /*#__PURE__*/React.createElement("div", {
-    className: "pl-hero-c"
+    className: "scene-c"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "pl-eye"
+    className: "scene-eye"
   }, "Dr. Ing. h.c. F. Porsche"), /*#__PURE__*/React.createElement("div", {
-    className: "pl-word"
+    className: "scene-h",
+    style: {
+      fontSize: 42,
+      letterSpacing: 6
+    }
   }, "PORSCHE"), /*#__PURE__*/React.createElement("div", {
-    className: "pl-claim"
-  }, "There is no substitute."), /*#__PURE__*/React.createElement("div", {
-    className: "pl-rule"
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "pl-intro"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "pl-h"
-  }, "车型总览", /*#__PURE__*/React.createElement("span", null, "MODEL RANGE")), /*#__PURE__*/React.createElement("div", {
-    className: "pl-sub"
-  }, "六大车系,从中置跑车到纯电 SUV。当前已深度收录 911。")), /*#__PURE__*/React.createElement("div", {
-    className: "bands"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "band live",
+    className: "scene-sub"
+  }, "There is no substitute."))), /*#__PURE__*/React.createElement("div", {
+    className: "scene",
     onClick: () => onOpen("911"),
     role: "button",
     tabIndex: 0,
     onKeyDown: e => e.key === "Enter" && onOpen("911")
   }, /*#__PURE__*/React.createElement("img", {
+    className: "scene-img",
     src: "./img/v-carrera-s.jpg",
-    alt: "Porsche 911"
+    alt: "911"
   }), /*#__PURE__*/React.createElement("div", {
-    className: "band-g"
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "band-badge red"
+    className: "scene-g"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "scene-c"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "scene-eye"
   }, "992.2 · 已收录"), /*#__PURE__*/React.createElement("div", {
-    className: "band-c"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "band-name"
+    className: "scene-h"
   }, "911"), /*#__PURE__*/React.createElement("div", {
-    className: "band-body"
-  }, "经典后置跑车 · Carrera / GTS / Turbo")), /*#__PURE__*/React.createElement("div", {
-    className: "band-go"
-  }, "进入 ", /*#__PURE__*/React.createElement(IChev, {
-    s: 16
-  })))), MODELS.map(m => /*#__PURE__*/React.createElement("div", {
-    className: "band locked",
+    className: "scene-sub"
+  }, "经典后置跑车 · Carrera / GTS / Turbo"), /*#__PURE__*/React.createElement("div", {
+    className: "scene-cta"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "pill red"
+  }, "进入 911 ", /*#__PURE__*/React.createElement(IChev, {
+    s: 15
+  }))))), /*#__PURE__*/React.createElement("div", {
+    className: "scene",
+    onClick: () => onOpen("gt3"),
+    role: "button",
+    tabIndex: 0,
+    onKeyDown: e => e.key === "Enter" && onOpen("gt3")
+  }, /*#__PURE__*/React.createElement("img", {
+    className: "scene-img",
+    src: "./img/p4.jpg",
+    alt: "GT3 Motorsport"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "scene-g"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "scene-c"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "scene-eye"
+  }, "Motorsport"), /*#__PURE__*/React.createElement("div", {
+    className: "scene-h"
+  }, "GT3 赛事"), /*#__PURE__*/React.createElement("div", {
+    className: "scene-sub"
+  }, "四台传奇涂装,每一台都有自己的故事"), /*#__PURE__*/React.createElement("div", {
+    className: "scene-cta"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "pill red"
+  }, "进入赛事 ", /*#__PURE__*/React.createElement(IChev, {
+    s: 15
+  }))))), MODELS.map(m => /*#__PURE__*/React.createElement("div", {
+    className: "scene",
     key: m.id
   }, /*#__PURE__*/React.createElement("img", {
+    className: "scene-img",
     src: m.img,
     alt: m.name,
-    loading: "lazy"
+    loading: "lazy",
+    style: {
+      filter: "grayscale(.4) brightness(.62)"
+    }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "band-g"
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "band-badge"
-  }, "敬请期待"), /*#__PURE__*/React.createElement("div", {
-    className: "band-c"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "band-name"
+    className: "scene-g"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "scene-c"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "scene-eye"
+  }, m.cn), /*#__PURE__*/React.createElement("div", {
+    className: "scene-h"
   }, m.name), /*#__PURE__*/React.createElement("div", {
-    className: "band-body"
-  }, m.cn, " · ", m.body)), /*#__PURE__*/React.createElement(ILock, {
-    s: 17,
-    col: "rgba(255,255,255,.72)"
-  }))))), /*#__PURE__*/React.createElement("div", {
-    className: "pl-note"
-  }, "影像来自 Wikimedia Commons(CC BY/BY-SA)· 个人非商业鉴赏", /*#__PURE__*/React.createElement("br", null), "字体 Porsche Next · 设计语言参照 porsche.com"));
+    className: "scene-sub"
+  }, m.body), /*#__PURE__*/React.createElement("div", {
+    className: "scene-cta"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "pill ghost"
+  }, "敬请期待 ", /*#__PURE__*/React.createElement(ILock, {
+    s: 13
+  })))))), /*#__PURE__*/React.createElement("div", {
+    className: "ap-foot"
+  }, "影像 Wikimedia Commons CC BY/BY-SA · 个人非商业鉴赏", /*#__PURE__*/React.createElement("br", null), "字体 Porsche Next · 设计语言参照 apple.com / porsche.com"));
 }
-const PTABS = [{
-  id: "variant",
-  label: "车型"
-}, {
-  id: "heritage",
-  label: "传承"
-}, {
-  id: "race",
-  label: "赛道"
-}, {
-  id: "ring",
-  label: "纽北"
-}, {
-  id: "power",
-  label: "动力"
-}];
 function Detail911({
-  setDark,
   reduced
 }) {
   const [vi, setVi] = useState(2);
-  const [active, setActive] = useState("variant");
-  const refs = {
-    variant: useRef(null),
-    heritage: useRef(null),
-    race: useRef(null),
-    ring: useRef(null),
-    power: useRef(null)
-  };
   useEffect(() => {
     window.scrollTo(0, 0);
-    setDark(true);
   }, []);
-  useEffect(() => {
-    const onScroll = () => {
-      setDark(window.scrollY < 360);
-      let cur = "variant";
-      for (const t of PTABS) {
-        const el = refs[t.id].current;
-        if (el && el.getBoundingClientRect().top <= 110) cur = t.id;
-      }
-      setActive(cur);
-    };
-    window.addEventListener("scroll", onScroll, {
-      passive: true
-    });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-  const go = id => refs[id].current && refs[id].current.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
   const v = V911[vi];
   return /*#__PURE__*/React.createElement("div", {
-    className: "pd enter"
+    className: "ap enter"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "pd-hero"
+    className: "scene",
+    style: {
+      minHeight: "90vh"
+    }
   }, /*#__PURE__*/React.createElement("img", {
-    src: "./img/hero.jpg",
-    alt: "保时捷 911 GT3 R Rexy"
+    className: "scene-img",
+    src: "./img/road.jpg",
+    alt: "911"
   }), /*#__PURE__*/React.createElement("div", {
-    className: "pd-hero-g"
+    className: "scene-g"
   }), /*#__PURE__*/React.createElement("div", {
-    className: "pd-hero-c"
+    className: "scene-c"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "pd-eye"
-  }, "911 · Type 992.2"), /*#__PURE__*/React.createElement("div", {
-    className: "pd-911"
+    className: "scene-eye"
+  }, "Type 992.2"), /*#__PURE__*/React.createElement("div", {
+    className: "scene-h",
+    style: {
+      fontSize: 88,
+      letterSpacing: 1
+    }
   }, "911"), /*#__PURE__*/React.createElement("div", {
-    className: "pd-claim"
-  }, "风冷的灵魂,赛道淬炼的新章。"), /*#__PURE__*/React.createElement("div", {
-    className: "pd-cap"
-  }, "封面 · AO Racing 911 GT3 R「Rexy」 · IMSA GTD"))), /*#__PURE__*/React.createElement("div", {
-    className: "pnav"
-  }, PTABS.map(t => /*#__PURE__*/React.createElement("button", {
-    key: t.id,
-    className: active === t.id ? "on" : "",
-    onClick: () => go(t.id)
-  }, t.label))), /*#__PURE__*/React.createElement("section", {
-    className: "psec dark",
-    ref: refs.variant
-  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
-    className: "pk"
-  }, "Model Variants"), /*#__PURE__*/React.createElement("div", {
-    className: "ph2"
-  }, "车型变体", /*#__PURE__*/React.createElement("span", null, "四款配置 · 点选查看完整参数"))), /*#__PURE__*/React.createElement("div", {
-    className: "vgrid"
+    className: "scene-sub"
+  }, "风冷的灵魂,赛道淬炼的新章。"))), /*#__PURE__*/React.createElement("div", {
+    className: "vrow"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "vrow-h"
+  }, "车型变体"), /*#__PURE__*/React.createElement("div", {
+    className: "vrow-sub"
+  }, "四款配置 · 点选查看参数"), /*#__PURE__*/React.createElement("div", {
+    className: "vlist"
   }, V911.map((x, i) => /*#__PURE__*/React.createElement("div", {
-    className: `vcard ${i === vi ? "on" : ""}`,
+    className: `vc ${i === vi ? "on" : ""}`,
     key: i,
     onClick: () => setVi(i),
     role: "button",
     tabIndex: 0,
     onKeyDown: e => e.key === "Enter" && setVi(i)
   }, /*#__PURE__*/React.createElement("div", {
-    className: "vcard-img"
+    className: "vc-img"
   }, /*#__PURE__*/React.createElement("img", {
     src: x.img,
     alt: x.k,
     loading: "lazy"
   })), /*#__PURE__*/React.createElement("div", {
-    className: "vcard-c"
+    className: "vc-c"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "vcard-t"
+    className: "vc-t"
   }, "911 ", x.k), /*#__PURE__*/React.createElement("div", {
-    className: "vcard-b"
+    className: "vc-b"
   }, x.body), /*#__PURE__*/React.createElement("div", {
-    className: "vcard-row"
+    className: "vc-row"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "v"
   }, x.acc), /*#__PURE__*/React.createElement("div", {
     className: "l"
   }, "0–100")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "v"
-  }, x.pw.replace(' PS', ''), /*#__PURE__*/React.createElement("small", null, " PS")), /*#__PURE__*/React.createElement("div", {
+  }, x.pw.replace(" PS", ""), /*#__PURE__*/React.createElement("small", null, " PS")), /*#__PURE__*/React.createElement("div", {
     className: "l"
   }, "功率")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "v"
-  }, x.top.replace(' km/h', ''), /*#__PURE__*/React.createElement("small", null, " km/h")), /*#__PURE__*/React.createElement("div", {
+  }, x.top.replace(" km/h", ""), /*#__PURE__*/React.createElement("small", null)), /*#__PURE__*/React.createElement("div", {
     className: "l"
-  }, "极速")))))))), /*#__PURE__*/React.createElement("section", {
-    className: "psec light",
-    style: {
-      paddingTop: 30
-    }
-  }, /*#__PURE__*/React.createElement("div", {
+  }, "km/h")))))))), /*#__PURE__*/React.createElement("div", {
     className: "sheet"
   }, /*#__PURE__*/React.createElement("div", {
     className: "sheet-h"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "t"
   }, "911 ", v.k), /*#__PURE__*/React.createElement("div", {
-    className: "b"
-  }, v.body)), /*#__PURE__*/React.createElement("div", {
+    className: "sheet-sub"
+  }, v.body), /*#__PURE__*/React.createElement("div", {
+    className: "sheet-card"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "sheet-r"
   }, /*#__PURE__*/React.createElement("span", {
     className: "k"
@@ -1276,105 +1140,50 @@ function Detail911({
     className: "k"
   }, "纽北单圈"), /*#__PURE__*/React.createElement("span", {
     className: "vv"
-  }, v.nb)))), /*#__PURE__*/React.createElement("section", {
-    className: "psec dark",
-    ref: refs.heritage
-  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
-    className: "pk"
-  }, "Heritage · 1963—"), /*#__PURE__*/React.createElement("div", {
-    className: "ph2"
-  }, "六十年,一个轮廓", /*#__PURE__*/React.createElement("span", null, "SIXTY YEARS, ONE SILHOUETTE")), /*#__PURE__*/React.createElement("p", {
-    className: "plead"
-  }, "从风冷到水冷再到混动,911 换了八代引擎,却始终把发动机吊在后轴之后。")), /*#__PURE__*/React.createElement("div", {
-    className: "tl"
-  }, HISTORY.map((h, i) => /*#__PURE__*/React.createElement(Reveal, {
-    key: i
+  }, v.nb)))), /*#__PURE__*/React.createElement("div", {
+    className: "ring"
   }, /*#__PURE__*/React.createElement("div", {
-    className: `tl-i ${h.key ? "key" : ""}`
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "tl-y"
-  }, h.y), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "tl-n"
-  }, h.n), /*#__PURE__*/React.createElement("div", {
-    className: "tl-t"
-  }, h.t))))))), /*#__PURE__*/React.createElement("section", {
-    className: "psec dark",
-    ref: refs.race
-  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
-    className: "pk"
-  }, "Motorsport"), /*#__PURE__*/React.createElement("div", {
-    className: "ph2"
-  }, "赛道传奇", /*#__PURE__*/React.createElement("span", null, "滑动浏览厂队与赛车涂装"))), /*#__PURE__*/React.createElement("div", {
-    className: "gal"
-  }, RACE.map((r, i) => /*#__PURE__*/React.createElement("div", {
-    className: "gcard",
-    key: i
-  }, /*#__PURE__*/React.createElement("img", {
-    src: r.img,
-    alt: r.name,
-    loading: "lazy"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "gcard-g"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "gcard-no"
-  }, r.no), /*#__PURE__*/React.createElement("div", {
-    className: "gcard-cls"
-  }, r.cls), /*#__PURE__*/React.createElement("div", {
-    className: "gcard-c"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "gcard-t"
-  }, r.name), /*#__PURE__*/React.createElement("div", {
-    className: "gcard-s"
-  }, r.s)))))), /*#__PURE__*/React.createElement("section", {
-    className: "psec dark",
-    ref: refs.ring
-  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
-    className: "pk"
+    className: "ring-eye"
   }, "Nordschleife · Green Hell"), /*#__PURE__*/React.createElement("div", {
-    className: "ph2"
-  }, "绿色地狱", /*#__PURE__*/React.createElement("span", null, "992.2 GTS T-Hybrid · 官方计时")), /*#__PURE__*/React.createElement("div", {
-    className: "nb"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "nb-map"
-  }, /*#__PURE__*/React.createElement(Nord, {
-    reduced: reduced
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "nb-r"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "nb-lap"
+    className: "ring-lap"
   }, "7:16", /*#__PURE__*/React.createElement("span", {
     className: "ms"
   }, ".9")), /*#__PURE__*/React.createElement("div", {
-    className: "nb-ln"
-  }, "Jörg Bergmeister 驾驶 · 较上代快约 8.7 秒"), /*#__PURE__*/React.createElement("div", {
-    className: "nb-grid"
+    className: "ring-sub"
+  }, "992.2 Carrera GTS T-Hybrid · 官方计时", /*#__PURE__*/React.createElement("br", null), "Jörg Bergmeister 驾驶 · 较上代快约 8.7 秒"), /*#__PURE__*/React.createElement("div", {
+    className: "ring-map"
+  }, /*#__PURE__*/React.createElement(Nord, {
+    reduced: reduced
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "ring-grid"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "nb-c"
+    className: "ring-c"
   }, /*#__PURE__*/React.createElement("div", {
     className: "v"
-  }, "20.8 km"), /*#__PURE__*/React.createElement("div", {
+  }, "20.8"), /*#__PURE__*/React.createElement("div", {
     className: "l"
-  }, "单圈")), /*#__PURE__*/React.createElement("div", {
-    className: "nb-c"
+  }, "单圈 km")), /*#__PURE__*/React.createElement("div", {
+    className: "ring-c"
   }, /*#__PURE__*/React.createElement("div", {
     className: "v"
   }, "73"), /*#__PURE__*/React.createElement("div", {
     className: "l"
   }, "弯道")), /*#__PURE__*/React.createElement("div", {
-    className: "nb-c"
+    className: "ring-c"
   }, /*#__PURE__*/React.createElement("div", {
     className: "v"
-  }, "+300 m"), /*#__PURE__*/React.createElement("div", {
+  }, "+300"), /*#__PURE__*/React.createElement("div", {
     className: "l"
-  }, "落差"))))))), /*#__PURE__*/React.createElement("section", {
-    className: "psec dark",
-    ref: refs.power
-  }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
-    className: "pk"
-  }, "Powertrain · 9A3 T-Hybrid"), /*#__PURE__*/React.createElement("div", {
-    className: "ph2"
-  }, "心脏,吊在后轴之后", /*#__PURE__*/React.createElement("span", null, "HEART BEHIND THE REAR AXLE")), /*#__PURE__*/React.createElement("div", {
-    className: "eng-stage"
+  }, "落差 m")))), /*#__PURE__*/React.createElement("div", {
+    className: "tech"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "tech-eye"
+  }, "The Pinnacle · 9A3 T-Hybrid"), /*#__PURE__*/React.createElement("div", {
+    className: "tech-h"
+  }, "T-Hybrid"), /*#__PURE__*/React.createElement("div", {
+    className: "tech-sub"
+  }, "第一台混动量产 911。最尖端的技术,留到最后。"), /*#__PURE__*/React.createElement("div", {
+    className: "tech-stage"
   }, /*#__PURE__*/React.createElement(FlatSix, {
     reduced: reduced
   })), /*#__PURE__*/React.createElement("div", {
@@ -1387,95 +1196,203 @@ function Detail911({
     className: "call"
   }, /*#__PURE__*/React.createElement("b", null, "e-Turbo")), /*#__PURE__*/React.createElement("span", {
     className: "call"
-  }, /*#__PURE__*/React.createElement("b", null, "400V"), " Hybrid"), /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("b", null, "400V")), /*#__PURE__*/React.createElement("span", {
     className: "call"
   }, "后置后驱")), /*#__PURE__*/React.createElement("p", {
-    className: "eng-x"
-  }, "911 把发动机吊在后轴之后——七十年不变的执念。水平对置让六个活塞左右对冲、抵消振动,重心贴地。992.2 GTS 换上 9A3 系 3.6L boxer,配电动排气涡轮(e-Turbo)几乎抹掉迟滞,思路源自 F1 MGU-H 与勒芒 919 Hybrid。叠加 400V T-Hybrid 后整车 541 PS,0–100 仅 3.0 秒——第一台混动量产 911。"), /*#__PURE__*/React.createElement("div", {
-    className: "eng-stats"
+    className: "tech-x"
+  }, "911 把发动机吊在后轴之后——七十年不变的执念。992.2 GTS 换上 9A3 系 3.6L 水平对置六缸,配一只电动排气涡轮(e-Turbo):涡轮轴上集成电机,几乎抹掉迟滞,思路源自 F1 MGU-H 与勒芒 919 Hybrid。叠加 400V T-Hybrid 系统后整车 541 PS,0–100 仅 3.0 秒。"), /*#__PURE__*/React.createElement("div", {
+    className: "tech-stats"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "eng-s"
+    className: "tech-s"
   }, /*#__PURE__*/React.createElement("div", {
     className: "v"
   }, "541", /*#__PURE__*/React.createElement("small", null, " PS")), /*#__PURE__*/React.createElement("div", {
     className: "l"
   }, "系统总功率")), /*#__PURE__*/React.createElement("div", {
-    className: "eng-s"
+    className: "tech-s"
   }, /*#__PURE__*/React.createElement("div", {
     className: "v"
   }, "97×81", /*#__PURE__*/React.createElement("small", null, " mm")), /*#__PURE__*/React.createElement("div", {
     className: "l"
   }, "缸径×行程")), /*#__PURE__*/React.createElement("div", {
-    className: "eng-s"
+    className: "tech-s"
   }, /*#__PURE__*/React.createElement("div", {
     className: "v"
   }, "1.9", /*#__PURE__*/React.createElement("small", null, " kWh")), /*#__PURE__*/React.createElement("div", {
     className: "l"
   }, "电池容量")), /*#__PURE__*/React.createElement("div", {
-    className: "eng-s"
+    className: "tech-s"
   }, /*#__PURE__*/React.createElement("div", {
     className: "v"
   }, "3.0", /*#__PURE__*/React.createElement("small", null, " s")), /*#__PURE__*/React.createElement("div", {
     className: "l"
-  }, "0–100 km/h"))))), /*#__PURE__*/React.createElement("div", {
-    className: "pfoot"
-  }, "数据 Porsche AG / sport auto · 个人鉴赏 demo", /*#__PURE__*/React.createElement("br", null), "影像 © AO Racing · Osajus · D.Merrett · NVer · A.Migl · Wikimedia Commons CC BY/BY-SA", /*#__PURE__*/React.createElement("br", null), "字体 Porsche Next · 设计语言参照 porsche.com"));
+  }, "0–100 km/h")))), /*#__PURE__*/React.createElement("div", {
+    className: "ap-foot"
+  }, "数据 Porsche AG / sport auto · 个人鉴赏 demo"));
+}
+function GT3List({
+  onOpen
+}) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "ap enter"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "scene",
+    style: {
+      minHeight: "82vh"
+    }
+  }, /*#__PURE__*/React.createElement("img", {
+    className: "scene-img",
+    src: "./img/p4.jpg",
+    alt: "Porsche Motorsport"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "scene-g"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "scene-c"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "scene-eye"
+  }, "Porsche Motorsport"), /*#__PURE__*/React.createElement("div", {
+    className: "scene-h"
+  }, "GT3 赛事"), /*#__PURE__*/React.createElement("div", {
+    className: "scene-sub"
+  }, "911 的赛道魂 · 四台传奇涂装,逐一翻看"))), GT3.map((g, i) => /*#__PURE__*/React.createElement("div", {
+    className: "gitem",
+    key: g.id,
+    onClick: () => onOpen(i),
+    role: "button",
+    tabIndex: 0,
+    onKeyDown: e => e.key === "Enter" && onOpen(i)
+  }, /*#__PURE__*/React.createElement("img", {
+    src: g.img,
+    alt: g.name,
+    loading: "lazy"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "gitem-g"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "gitem-no"
+  }, g.no), /*#__PURE__*/React.createElement("div", {
+    className: "gitem-cls"
+  }, g.cls), /*#__PURE__*/React.createElement("div", {
+    className: "gitem-c"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "gitem-name"
+  }, g.name), /*#__PURE__*/React.createElement("div", {
+    className: "gitem-team"
+  }, g.team), /*#__PURE__*/React.createElement("div", {
+    className: "scene-cta",
+    style: {
+      justifyContent: "flex-start",
+      marginTop: 14
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "pill ghost"
+  }, "查看海报故事 ", /*#__PURE__*/React.createElement(IChev, {
+    s: 15
+  })))))), /*#__PURE__*/React.createElement("div", {
+    className: "ap-foot"
+  }, "影像 © AO Racing · Osajus · D.Merrett · NVer · Wikimedia Commons CC BY/BY-SA"));
+}
+function GT3Car({
+  car
+}) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "ap enter"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "poster"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: car.img,
+    alt: car.name
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "poster-g"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "poster-c"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "poster-no"
+  }, car.no), /*#__PURE__*/React.createElement("div", {
+    className: "poster-name"
+  }, car.name), /*#__PURE__*/React.createElement("div", {
+    className: "poster-team"
+  }, car.team, " · ", car.cls))), /*#__PURE__*/React.createElement("div", {
+    className: "pstory"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "pstory-eye"
+  }, "The Story"), /*#__PURE__*/React.createElement("div", {
+    className: "pstory-h"
+  }, car.name), /*#__PURE__*/React.createElement("p", {
+    className: "pstory-x"
+  }, car.story), /*#__PURE__*/React.createElement("div", {
+    className: "pstory-tags"
+  }, car.tags.map((t, i) => /*#__PURE__*/React.createElement("span", {
+    className: "ptag",
+    key: i
+  }, t)))), /*#__PURE__*/React.createElement("div", {
+    className: "ap-foot"
+  }, "个人非商业鉴赏 · 影像经 Wikimedia Commons"));
 }
 function Porsche({
   model,
   setModel,
-  reduced,
-  setDark
+  car,
+  setCar,
+  reduced
 }) {
+  if (model === "gt3") {
+    if (car != null) return /*#__PURE__*/React.createElement(GT3Car, {
+      car: GT3[car]
+    });
+    return /*#__PURE__*/React.createElement(GT3List, {
+      onOpen: setCar
+    });
+  }
   if (model === "911") return /*#__PURE__*/React.createElement(Detail911, {
-    setDark: setDark,
     reduced: reduced
   });
   return /*#__PURE__*/React.createElement(Lineup, {
-    onOpen: setModel,
-    setDark: setDark
+    onOpen: setModel
   });
 }
 function App() {
   const [view, setView] = useState("home");
-  const [pDark, setPDark] = useState(true);
-  const reduced = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const [pModel, setPModel] = useState(null);
+  const [pCar, setPCar] = useState(null);
+  const reduced = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   useEffect(() => {
     window.scrollTo(0, 0);
     const m = document.getElementById("themeColor");
-    if (m) m.setAttribute("content", view === "porsche" ? "#0e0e12" : "#f5f4ed");
-  }, [view]);
+    if (m) m.setAttribute("content", view === "porsche" ? "#000000" : "#f5f4ed");
+  }, [view, pModel, pCar]);
+  const back = () => {
+    if (pCar != null) setPCar(null);else if (pModel) setPModel(null);else setView("home");
+  };
   return /*#__PURE__*/React.createElement("div", {
     className: "frame",
     style: {
-      background: view === "porsche" ? pDark ? "#0e0e12" : "#ffffff" : "#f5f4ed"
+      background: view === "porsche" ? "#000" : "#f5f4ed"
     }
   }, view === "porsche" && /*#__PURE__*/React.createElement("div", {
-    className: `pbar ${pDark ? "ondark" : "onlight"}`
+    className: "anav"
   }, /*#__PURE__*/React.createElement("button", {
-    className: "pbar-btn",
-    onClick: () => pModel ? setPModel(null) : setView("home"),
+    className: "anav-btn",
+    onClick: back,
     "aria-label": "返回"
   }, /*#__PURE__*/React.createElement(IBack, null)), /*#__PURE__*/React.createElement("div", {
-    className: "pbar-word"
-  }, "PORSCHE"), /*#__PURE__*/React.createElement("div", {
-    className: "pbar-r"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "pbar-btn",
-    "aria-label": "搜索"
-  }, /*#__PURE__*/React.createElement(ISearch, {
-    s: 18
-  })), /*#__PURE__*/React.createElement("button", {
-    className: "pbar-btn",
+    className: "anav-logo"
+  }, "PORSCHE"), /*#__PURE__*/React.createElement("button", {
+    className: "anav-btn",
     "aria-label": "分享"
-  }, /*#__PURE__*/React.createElement(IShare, null)))), view === "home" ? /*#__PURE__*/React.createElement(Shell, {
+  }, /*#__PURE__*/React.createElement(IShare, null))), view === "home" ? /*#__PURE__*/React.createElement(Shell, {
     onOpen: id => id === "porsche" && setView("porsche")
   }) : /*#__PURE__*/React.createElement(Porsche, {
     model: pModel,
     setModel: setPModel,
-    reduced: reduced,
-    setDark: setPDark
+    car: pCar,
+    setCar: setPCar,
+    reduced: reduced
   }));
 }
 ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/React.createElement(App, null));
