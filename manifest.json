@@ -1,6 +1,6 @@
 {
-  "name": "掌上车库",
-  "short_name": "车库",
+  "name": "Kyklos",
+  "short_name": "Kyklos",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

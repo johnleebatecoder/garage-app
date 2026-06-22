@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="theme-color" content="#f5f4ed" id="themeColor" />
-<title>掌上车库</title>
+<title>Kyklos</title>
 <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
 <link rel="manifest" href="./manifest.json" />
 <style>
@@ -46,10 +46,11 @@ body{font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:o
 .sh-ic{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--olive);background:transparent;border:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .18s}
 .sh-ic:active{background:var(--sand);transform:scale(.94)}
 .sh-word{font-family:var(--serif);font-weight:500;font-size:20px;letter-spacing:.2px}
-.sh-hello{padding:26px 24px 6px}
-.sh-hello h1{font-family:var(--serif);font-weight:500;font-size:42px;line-height:1.1;letter-spacing:-.2px}
+.sh-hello{padding:34px 24px 6px}
+.sh-eye{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--stone);font-weight:600;margin-bottom:16px}
+.sh-hello h1{font-family:var(--serif);font-weight:500;font-size:46px;line-height:1.08;letter-spacing:-.4px}
 .sh-hello h1 em{font-style:normal;color:var(--clay)}
-.sh-hello p{font-size:15px;color:var(--olive);line-height:1.6;margin-top:14px}
+.sh-hello p{font-size:15px;color:var(--olive);line-height:1.6;margin-top:16px}
 .sh-search{margin:22px 20px 8px;display:flex;align-items:center;gap:10px;background:var(--ivory);border-radius:14px;padding:13px 15px;color:var(--stone);font-size:14.5px;box-shadow:0 0 0 1px var(--line-soft)}
 .sh-label{font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--stone);font-weight:600;padding:26px 26px 12px}
 .sh-list{padding:0 12px;display:flex;flex-direction:column;gap:10px}
@@ -106,7 +107,24 @@ body{font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:o
 .mcard-t{font-weight:700;font-size:16px;display:flex;align-items:center;gap:5px}
 .mcard-s{font-size:11px;color:var(--pl-mut);margin-top:3px}
 .mcard-lock{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.9);border-radius:2px;padding:3px 6px;font-size:9px;font-weight:600;color:var(--pl-mut);letter-spacing:.5px}
-.pl-note{font-size:11px;color:var(--pl-mut);text-align:center;margin-top:26px;line-height:1.7}
+.pxd{background:#0e0e12;color:#fff}
+.pl-intro{padding:30px 18px 6px}
+.pl-intro .pl-h{font-weight:700;font-size:23px}
+.pl-intro .pl-h span{color:var(--pd-mut)}
+.pl-intro .pl-sub{color:var(--pd-mut)}
+.bands{margin-top:18px}
+.band{position:relative;height:240px;overflow:hidden;cursor:pointer;background:#000;border-top:1px solid rgba(255,255,255,.08);-webkit-tap-highlight-color:transparent}
+.band img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.band.live:active img{transform:scale(1.04)}
+.band.locked img{filter:grayscale(.45) brightness(.62)}
+.band-g{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 38%,rgba(0,0,0,.9))}
+.band-badge{position:absolute;top:14px;left:18px;z-index:2;font-size:10px;font-weight:700;letter-spacing:.5px;color:#fff;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.28);padding:4px 9px;border-radius:2px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.band-badge.red{background:var(--pr);border-color:var(--pr)}
+.band-c{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;color:#fff;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+.band-name{font-weight:700;font-size:36px;letter-spacing:1px;line-height:.95}
+.band-body{font-size:12px;color:rgba(255,255,255,.82);margin-top:7px}
+.band-go{font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:4px;white-space:nowrap}
+.pl-note{font-size:11px;color:var(--pd-mut);text-align:center;padding:26px 24px 0;line-height:1.7}
 
 /* 911 详情 */
 .pd{font-family:var(--pn);background:var(--pd-bg);color:var(--pd-ink);min-height:100vh;min-height:100dvh}
@@ -949,8 +967,10 @@ function Reveal({
 function Shell({
   onOpen
 }) {
-  const h = new Date().getHours();
+  const d = new Date();
+  const h = d.getHours();
   const greet = h < 5 ? "夜深了" : h < 11 ? "早上好" : h < 14 ? "中午好" : h < 18 ? "下午好" : "晚上好";
+  const wd = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"][d.getDay()];
   return /*#__PURE__*/React.createElement("div", {
     className: "shell enter"
   }, /*#__PURE__*/React.createElement("div", {
@@ -960,12 +980,14 @@ function Shell({
     "aria-label": "菜单"
   }, /*#__PURE__*/React.createElement(IMenu, null)), /*#__PURE__*/React.createElement("div", {
     className: "sh-word"
-  }, "掌上车库"), /*#__PURE__*/React.createElement("button", {
+  }, "Kyklos"), /*#__PURE__*/React.createElement("button", {
     className: "sh-ic",
     "aria-label": "收录新车"
   }, /*#__PURE__*/React.createElement(IPlus, null))), /*#__PURE__*/React.createElement("div", {
     className: "sh-hello"
-  }, /*#__PURE__*/React.createElement("h1", null, greet, "。", /*#__PURE__*/React.createElement("br", null), "今天看", /*#__PURE__*/React.createElement("em", null, "哪台"), "？"), /*#__PURE__*/React.createElement("p", null, "车库已收录 4 个品牌 · 每个进去都是一座品牌展厅")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sh-eye"
+  }, wd, " · ", d.getMonth() + 1, "月", d.getDate(), "日"), /*#__PURE__*/React.createElement("h1", null, greet, "。", /*#__PURE__*/React.createElement("br", null), "今天看", /*#__PURE__*/React.createElement("em", null, "哪台"), "？"), /*#__PURE__*/React.createElement("p", null, "车库已收录 4 个品牌 · 每个进去都是一座品牌展厅")), /*#__PURE__*/React.createElement("div", {
     className: "sh-search"
   }, /*#__PURE__*/React.createElement(ISearch, null), " 搜索品牌 / 车型"), /*#__PURE__*/React.createElement("div", {
     className: "sh-label"
@@ -1005,22 +1027,14 @@ function Shell({
 }
 function Lineup({
   onOpen,
-  onHome,
   setDark
 }) {
   useEffect(() => {
     setDark(true);
     window.scrollTo(0, 0);
   }, []);
-  const onScroll = () => setDark(window.scrollY < 360);
-  useEffect(() => {
-    window.addEventListener("scroll", onScroll, {
-      passive: true
-    });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
   return /*#__PURE__*/React.createElement("div", {
-    className: "px enter"
+    className: "px pxd enter"
   }, /*#__PURE__*/React.createElement("div", {
     className: "pl-hero"
   }, /*#__PURE__*/React.createElement("img", {
@@ -1039,59 +1053,59 @@ function Lineup({
   }, "There is no substitute."), /*#__PURE__*/React.createElement("div", {
     className: "pl-rule"
   }))), /*#__PURE__*/React.createElement("div", {
-    className: "pl-body"
+    className: "pl-intro"
   }, /*#__PURE__*/React.createElement("div", {
     className: "pl-h"
   }, "车型总览", /*#__PURE__*/React.createElement("span", null, "MODEL RANGE")), /*#__PURE__*/React.createElement("div", {
     className: "pl-sub"
-  }, "六大车系,从中置跑车到纯电 SUV。当前已深度收录 911。"), /*#__PURE__*/React.createElement("div", {
-    className: "feat",
+  }, "六大车系,从中置跑车到纯电 SUV。当前已深度收录 911。")), /*#__PURE__*/React.createElement("div", {
+    className: "bands"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "band live",
     onClick: () => onOpen("911"),
     role: "button",
     tabIndex: 0,
     onKeyDown: e => e.key === "Enter" && onOpen("911")
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "feat-img"
   }, /*#__PURE__*/React.createElement("img", {
     src: "./img/v-carrera-s.jpg",
     alt: "Porsche 911"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "band-g"
   }), /*#__PURE__*/React.createElement("span", {
-    className: "feat-badge"
-  }, "992.2 · 已收录")), /*#__PURE__*/React.createElement("div", {
-    className: "feat-c"
+    className: "band-badge red"
+  }, "992.2 · 已收录"), /*#__PURE__*/React.createElement("div", {
+    className: "band-c"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "feat-t"
+    className: "band-name"
   }, "911"), /*#__PURE__*/React.createElement("div", {
-    className: "feat-s"
+    className: "band-body"
   }, "经典后置跑车 · Carrera / GTS / Turbo")), /*#__PURE__*/React.createElement("div", {
-    className: "feat-go"
+    className: "band-go"
   }, "进入 ", /*#__PURE__*/React.createElement(IChev, {
     s: 16
-  })))), /*#__PURE__*/React.createElement("div", {
-    className: "mgrid"
-  }, MODELS.map(m => /*#__PURE__*/React.createElement("div", {
-    className: "mcard",
+  })))), MODELS.map(m => /*#__PURE__*/React.createElement("div", {
+    className: "band locked",
     key: m.id
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "mcard-img"
   }, /*#__PURE__*/React.createElement("img", {
     src: m.img,
     alt: m.name,
     loading: "lazy"
-  })), /*#__PURE__*/React.createElement("span", {
-    className: "mcard-lock"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "band-g"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "band-badge"
   }, "敬请期待"), /*#__PURE__*/React.createElement("div", {
-    className: "mcard-c"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "mcard-t"
-  }, m.name, /*#__PURE__*/React.createElement(ILock, {
-    s: 11,
-    col: "#9b9da1"
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "mcard-s"
-  }, m.cn, " · ", m.body))))), /*#__PURE__*/React.createElement("div", {
+    className: "band-c"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "band-name"
+  }, m.name), /*#__PURE__*/React.createElement("div", {
+    className: "band-body"
+  }, m.cn, " · ", m.body)), /*#__PURE__*/React.createElement(ILock, {
+    s: 17,
+    col: "rgba(255,255,255,.72)"
+  }))))), /*#__PURE__*/React.createElement("div", {
     className: "pl-note"
-  }, "影像来自 Wikimedia Commons(CC BY/BY-SA)· 个人非商业鉴赏", /*#__PURE__*/React.createElement("br", null), "字体 Porsche Next · 设计语言参照 porsche.com")));
+  }, "影像来自 Wikimedia Commons(CC BY/BY-SA)· 个人非商业鉴赏", /*#__PURE__*/React.createElement("br", null), "字体 Porsche Next · 设计语言参照 porsche.com"));
 }
 const PTABS = [{
   id: "variant",
